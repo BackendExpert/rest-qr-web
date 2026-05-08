@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import API from "../services/api";
+import DefaultButton from "../component/Buttons/DefaultButton";
 
 let isRequestSent = false;
 
@@ -10,6 +11,7 @@ const VerifyLink = () => {
 
     const [loading, setLoading] = useState(true);
     const [verified, setVerified] = useState(false);
+    const [user, setUser] = useState(null);
 
     const token = searchParams.get("token");
 
@@ -34,6 +36,7 @@ const VerifyLink = () => {
                         res.data.accessToken
                     );
 
+                    setUser(res.data.user); 
                     setVerified(true);
                 }
             } catch (err) {
@@ -45,51 +48,39 @@ const VerifyLink = () => {
         };
 
         fetchVerifyData();
-    }, [token]);
+    }, [token, navigate]);
 
-    if (loading) return <div>Verifying...</div>;
+    if (loading) {
+        return (
+            <div className="h-screen flex items-center justify-center text-lg font-semibold">
+                Verifying...
+            </div>
+        );
+    }
+
     if (!verified) return null;
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen gap-6">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 to-white px-4">
+            <div className="w-full max-w-md bg-white shadow-2xl rounded-3xl p-8 text-center border border-orange-100">
 
-            {/* 
-            
-            {
-  "success": true,
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWZlMGIxZTI3NGU1MDQ1NzE5ZWM5OWQiLCJlbWFpbCI6ImprYW5keW11c2ljQGdtYWlsLmNvbSIsInJvbGUiOiJtZW1iZXIiLCJpYXQiOjE3NzgyNTY3NDMsImV4cCI6MTc3ODM0MzE0M30.IRRVe62zzwH7BXkU_NwfuEUxcHqGkkfO0awgVJjTtLc",
-  "user": {
-    "_id": "69fe0b1e274e5045719ec99d",
-    "email": "jkandymusic@gmail.com",
-    "role": {
-      "_id": "69fe03e67e4bc6fdd2b0a462",
-      "role": "member",
-      "permissions": [
-        "order:create"
-      ]
-    },
-    "last_login": "2026-05-08T16:12:23.720Z",
-    "login_ip": "127.0.0.1",
-    "account_stats": true,
-    "createdAt": "2026-05-08T16:11:10.259Z",
-    "updatedAt": "2026-05-08T16:12:23.721Z",
-    "__v": 0
-  }
-}
-            
-            */}
+                <h1 className="text-2xl font-extrabold text-orange-500 mb-4">
+                    ✅ Verification Successful
+                </h1>
 
-            
-            <h1 className="text-2xl font-bold text-green-600">
-                ✅ Verification Successful
-            </h1>
+                {user && (
+                    <div className="bg-orange-50 rounded-xl p-4 text-left text-sm text-gray-700 mb-6 space-y-2">
+                        <p><span className="font-semibold">Email:</span> {user.email}</p>
+                        <p><span className="font-semibold">Role:</span> {user.role?.role}</p>
+                        <p><span className="font-semibold">Last Login:</span> {new Date(user.last_login).toLocaleString()}</p>
+                    </div>
+                )}
 
-            <button
-                onClick={() => navigate("/dashboard")}
-                className="px-6 py-3 bg-black text-white rounded-xl hover:opacity-80 transition"
-            >
-                Continue to Dashboard
-            </button>
+                <DefaultButton
+                    onClick={() => navigate("/dashboard")}
+                    label="Continue to Dashboard 🚀"
+                />
+            </div>
         </div>
     );
 };

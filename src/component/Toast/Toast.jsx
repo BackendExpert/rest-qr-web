@@ -16,21 +16,24 @@ const Toast = ({ success, message, onClose }) => {
     );
 
     const toastStyle = success
-        ? "bg-gradient-to-r from-green-600 to-green-700 border-l-4 border-green-400"
-        : "bg-gradient-to-r from-[#560606] to-[#3f0303] border-l-4 border-[#9b4b4b]";
+        ? "bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 border-l-4 border-orange-300"
+        : "bg-gradient-to-r from-orange-700 via-orange-800 to-orange-900 border-l-4 border-orange-400";
 
     return (
         <div
-            className={`flex items-center w-full max-w-sm p-4 mb-4 text-white rounded-xl shadow-lg transform transition-all duration-500 ease-out ${toastStyle} animate-slide-in`}
+            className={`flex items-center w-full max-w-sm p-4 mb-4 text-white rounded-2xl shadow-xl backdrop-blur-md
+                        transform transition-all duration-500 ease-out ${toastStyle} animate-slide-in`}
             role="alert"
         >
             {/* Icon */}
-            <div className="flex items-center justify-center w-8 h-8 bg-white/20 rounded-lg mr-3">
+            <div className="flex items-center justify-center w-9 h-9 bg-white/20 rounded-xl mr-3 shadow-inner">
                 {icon}
             </div>
 
             {/* Message */}
-            <div className="flex-1 text-sm font-medium">{message}</div>
+            <div className="flex-1 text-sm font-semibold tracking-wide">
+                {message}
+            </div>
 
             {/* Close Button */}
             <button
