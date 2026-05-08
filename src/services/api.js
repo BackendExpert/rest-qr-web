@@ -1,0 +1,31 @@
+import axios from "axios";
+import { getDeviceId } from "../utils/deviceId";
+
+const API = axios.create({
+    baseURL: import.meta.env.VITE_APP_API,
+    withCredentials: true,
+    headers: {
+        "Content-Type": "application/json"
+    }
+});
+
+
+API.interceptors.request.use(
+    (config) => {
+        const deviceId = getDeviceId();
+
+        if (config.headers?.set) {
+            config.headers.set("x-device-id", deviceId);
+        } else {
+            config.headers = {
+                ...config.headers,
+                "x-device-id": deviceId
+            };
+        }
+
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
+export default API;
