@@ -3,6 +3,7 @@ import WebSite from '../layouts/WebSite'
 import RequestLink from '../pages/auth/RequestLink'
 import VerifyLink from '../pages/auth/VerifyLink'
 import DefultError from '../component/Errors/DefultError'
+import Guest from '../pages/auth/Guest'
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
                     <Route path='*' element={<DefultError />} />
                     <Route index element={<RequestLink />} />
                     <Route path='/verify-link' element={<VerifyLink /> } />
+                    <Route path='/guest' element={<Guest /> } />
 
                 </Route>
 

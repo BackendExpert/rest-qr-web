@@ -199,6 +199,17 @@ const RequestLink = () => {
 
                         </form>
 
+                        <p className="my-4 text-center text-gray-500">or</p>
+
+                        <div className="">
+                            <a href="/guest">
+                                <DefaultButton 
+                                    type='button'
+                                    label='Continue as Guest'
+                                />
+                            </a>
+                        </div>
+
                         <div className="mt-6 flex items-center justify-center gap-2">
                             <span className="w-1.5 h-1.5 bg-orange-400 rounded-full"></span>
                             <p className="text-xs text-gray-400">
