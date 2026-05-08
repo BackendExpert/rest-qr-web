@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import WebSite from '../layouts/WebSite'
-import RequestLink from '../pages/RequestLink'
-import VerifyLink from '../pages/VerifyLink'
+import RequestLink from '../pages/auth/RequestLink'
+import VerifyLink from '../pages/auth/VerifyLink'
 import DefultError from '../component/Errors/DefultError'
 
 

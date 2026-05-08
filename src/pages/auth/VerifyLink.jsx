@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import API from "../services/api";
-import DefaultButton from "../component/Buttons/DefaultButton";
+import API from "../../services/api";
+import DefaultButton from "../../component/Buttons/DefaultButton";
 
 let isRequestSent = false;
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import API from '../services/api'
-import PizzaLogin from '../assets/Login.png'
-import Pizza from '../assets/pizza.png'
-import DefaultButton from '../component/Buttons/DefaultButton'
-import DefaultInput from '../component/Form/DefaultInput'
-import useForm from '../hooks/useForm'
-import Toast from '../component/Toast/Toast'
+import API from '../../services/api'
+import PizzaLogin from '../../assets/Login.png'
+import Pizza from '../../assets/pizza.png'
+import DefaultButton from '../../component/Buttons/DefaultButton'
+import DefaultInput from '../../component/Form/DefaultInput'
+import useForm from '../../hooks/useForm'
+import Toast from '../../component/Toast/Toast'
 
 
 const RequestLink = () => {
