@@ -14,22 +14,27 @@ export const AuthProvider = ({ children }) => {
 
     const [loading, setLoading] = useState(true);
 
+    const parseToken = (token) => {
+        const decoded = jwtDecode(token);
+
+        const email = decoded.email || "";
+        const username = email ? email.split("@")[0] : "";
+
+        return {
+            token,
+            id: decoded.sub || null,
+            email,
+            username,
+            role: decoded.role || null,
+        };
+    };
+
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
 
         if (storedToken) {
             try {
-                const decoded = jwtDecode(storedToken);
-                const email = decoded.user || "";
-                const username = email.split("@")[0];
-
-                setAuth({
-                    token: storedToken,
-                    id: decoded.sub,
-                    email,
-                    username,
-                    role: decoded.role,
-                });
+                setAuth(parseToken(storedToken));
             } catch (err) {
                 localStorage.removeItem("token");
             }
@@ -39,19 +44,12 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (token) => {
-        localStorage.setItem("token", token);
-
-        const decoded = jwtDecode(token);
-        const email = decoded.user || "";
-        const username = email.split("@")[0];
-
-        setAuth({
-            token,
-            id: decoded.sub,
-            email,
-            username,
-            role: decoded.role,
-        });
+        try {
+            localStorage.setItem("token", token);
+            setAuth(parseToken(token));
+        } catch (err) {
+            console.error("Invalid token on login", err);
+        }
     };
 
     const logout = (navigate) => {

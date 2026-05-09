@@ -5,9 +5,9 @@ import VerifyLink from '../pages/auth/VerifyLink'
 import DefultError from '../component/Errors/DefultError'
 import Guest from '../pages/auth/Guest'
 import Dashboard from '../layouts/Dashboard'
-import DashError from '../component/Errors/DashError'
 import PrivateRoute from './PrivateRoute'
 import DashHome from '../pages/dashboard/DashHome'
+import DashError from '../component/Dashboard/DashError'
 
 
 function App() {

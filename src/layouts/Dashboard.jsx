@@ -1,54 +1,75 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { MdOutlineClose } from 'react-icons/md';
-import { TiThMenu } from 'react-icons/ti';
-import { useAuth } from '../context/AuthContext';
-import { useLocation } from "react-router-dom";
-import DashNav from '../component/Dashboard/DashNav';
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import DashNav from "../component/Dashboard/DashNav";
+import { TiThMenu } from "react-icons/ti";
+import { MdOutlineClose } from "react-icons/md";
+import DashSide from "../component/Dashboard/DashSide";
+import DashFooter from "../component/Dashboard/DashFooter";
 
 const Dashboard = () => {
-    const [openside, setOpenSide] = useState(false);
-    const { auth } = useAuth()
-    const toggleMenu = () => setOpenSide(prev => !prev);
-    const location = useLocation()
+    const { auth } = useAuth();
+    const [open, setOpen] = useState(false);
 
-    let userdashtext = ''
+    let userdashtext = "User";
 
-    if (auth.role === "super_admin") {
-        userdashtext = "Super Admin"
-    }
-    else if (auth.role === "system_admin") {
-        userdashtext = "System Admin"
-    }
-    else {
-        userdashtext = "User"
+    if (auth?.role === "super_admin") {
+        userdashtext = "Super Admin";
+    } else if (auth?.role === "system_admin") {
+        userdashtext = "System Admin";
     }
 
     return (
-        <div className="h-screen w-screen flex overflow-hidden">
+        <div className="w-full flex bg-[#ffeee2]">
 
-            <div className="flex-1 flex flex-col h-screen">
+            {/* mobile menu button */}
+            <button
+                onClick={() => setOpen(true)}
+                className="xl:hidden fixed top-4 left-4 z-50 w-11 h-11 bg-orange-500 text-white rounded-full flex items-center justify-center shadow-lg"
+            >
+                <TiThMenu size={22} />
+            </button>
 
-                <div className="xl:ml-[12%] pb-4 flex-1 overflow-y-auto bg-[#f8f9fa]">
-                    <div className="">
-                        <DashNav />
-                    </div>
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-4 ml-8">
-                        <div className="space-y-1 sm:space-y-2">
-                            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 capitalize break-words">
-                                {userdashtext} Dashboard
-                            </h1>
-                            <p className="text-xs sm:text-sm md:text-base text-gray-500 capitalize break-words">
-                                {location.pathname}
-                            </p>
-                        </div>
+            {/* overlay */}
+            {open && (
+                <div
+                    onClick={() => setOpen(false)}
+                    className="fixed inset-0 bg-black/40 z-40 xl:hidden"
+                />
+            )}
 
-                    </div>
-                    <div className='mt-6 md:ml-8 ml-4 mr-2'>
-                        <Outlet />
-                    </div>
+            {/* SIDEBAR */}
+            <div
+                className={`fixed xl:sticky top-0 left-0 z-50 w-[290px] h-screen bg-white border-r border-orange-100 transform transition-transform duration-300 
+                ${open ? "translate-x-0" : "-translate-x-full"} xl:translate-x-0`}
+            >
+                <div className="h-full flex flex-col">
+
+                    <DashSide />
+
+                    <button
+                        onClick={() => setOpen(false)}
+                        className="xl:hidden absolute top-4 right-4 text-gray-600"
+                    >
+                        <MdOutlineClose size={24} />
+                    </button>
 
                 </div>
+            </div>
+
+            {/* MAIN CONTENT */}
+            <div className="flex-1 flex flex-col min-w-0 bg-[#f9f5f0]">
+
+                <DashNav />
+
+                <div className="flex-1 mx-6 min-h-screen">
+                    <Outlet />
+                </div>
+
+                <div className="mt-2">
+                    <DashFooter />
+                </div>
+
             </div>
         </div>
     );
