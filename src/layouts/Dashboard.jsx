@@ -29,24 +29,18 @@ const Dashboard = () => {
     return (
         <div className="h-screen w-screen flex overflow-hidden">
 
-            {/* MAIN WRAPPER */}
+
             <div className="flex-1 flex flex-col h-screen">
 
-                {/* NAVBAR (STAYS SAME) */}
-                <header className="top-0 left-0 w-full bg-transparent z-20">
-                    <DashNav />
-                </header>
-
-                {/* PAGE CONTENT */}
                 <div className="xl:ml-[15%] pb-4 flex-1 overflow-y-auto bg-[#f8f9fa]">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-4 ml-8">
                         <div className="space-y-1 sm:space-y-2">
                             <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 capitalize break-words">
                                 {userdashtext} Dashboard
                             </h1>
-                            {/* <p className="text-xs sm:text-sm md:text-base text-gray-500 capitalize break-words">
+                            <p className="text-xs sm:text-sm md:text-base text-gray-500 capitalize break-words">
                                 {location.pathname}
-                            </p> */}
+                            </p>
                         </div>
 
                     </div>
@@ -54,9 +48,6 @@ const Dashboard = () => {
                         <Outlet />
                     </div>
 
-                    <footer className="mt-6 ">
-                        <DashFooter />
-                    </footer>
                 </div>
             </div>
         </div>

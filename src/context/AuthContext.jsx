@@ -8,7 +8,8 @@ export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({
         token: null,
         id: null,
-        user: null,
+        email: null,
+        username: null,
         role: null,
     });
 
@@ -22,7 +23,8 @@ export const AuthProvider = ({ children }) => {
             setAuth({
                 token: storedToken,
                 id: decoded.sub,
-                user: { id: decoded.sub, email, username },
+                email: email,
+                username: username,
                 role: decoded.role,
             });
         }
@@ -37,7 +39,8 @@ export const AuthProvider = ({ children }) => {
         setAuth({
             token,
             id: decoded.sub,
-            user: { id: decoded.sub, email, username },
+            email: email,
+            username: username,
             role: decoded.role,
         });
     };
@@ -45,7 +48,7 @@ export const AuthProvider = ({ children }) => {
     // Logout function
     const logout = (navigate) => {
         localStorage.removeItem("token");
-        setAuth({ token: null, id: null, user: null, role: null });
+        setAuth({ token: null, id: null, email: null, username: null, role: null });
         navigate("/", { replace: true });
         window.location.reload();
     };
