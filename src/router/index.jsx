@@ -4,6 +4,9 @@ import RequestLink from '../pages/auth/RequestLink'
 import VerifyLink from '../pages/auth/VerifyLink'
 import DefultError from '../component/Errors/DefultError'
 import Guest from '../pages/auth/Guest'
+import Dashboard from '../layouts/Dashboard'
+import DashError from '../component/Errors/DashError'
+import PrivateRoute from './PrivateRoute'
 
 
 function App() {
@@ -18,9 +21,9 @@ function App() {
 
                 </Route>
 
-                {/* <Route path='/dashboard/' element={<PrivateRoute roles={['super_admin', 'system_admin', 'user']} ><Dashboard /></PrivateRoute>}>
-                    <Route path='*' element={<PrivateRoute roles={['super_admin', 'system_admin', 'user']} ><DashError /></PrivateRoute>} />
-                </Route> */}
+                <Route path='/dashboard/' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><Dashboard /></PrivateRoute>}>
+                    <Route path='*' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><DashError /></PrivateRoute>} />
+                </Route>
 
 
             </Routes>

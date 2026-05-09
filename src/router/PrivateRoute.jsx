@@ -7,7 +7,7 @@ const PrivateRoute = ({ children, roles }) => {
     const [isChecking, setIsChecking] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("accessToken");
         if (token) {
             setIsChecking(false);
         } else {
