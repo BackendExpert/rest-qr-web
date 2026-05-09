@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import {jwtDecode} from "jwt-decode"; 
-import { useNavigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -13,48 +12,62 @@ export const AuthProvider = ({ children }) => {
         role: null,
     });
 
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
+
         if (storedToken) {
-            const decoded = jwtDecode(storedToken);
-            const email = decoded.user || "";
-            const username = email.split("@")[0]; 
-            setAuth({
-                token: storedToken,
-                id: decoded.sub,
-                email: email,
-                username: username,
-                role: decoded.role,
-            });
+            try {
+                const decoded = jwtDecode(storedToken);
+                const email = decoded.user || "";
+                const username = email.split("@")[0];
+
+                setAuth({
+                    token: storedToken,
+                    id: decoded.sub,
+                    email,
+                    username,
+                    role: decoded.role,
+                });
+            } catch (err) {
+                localStorage.removeItem("token");
+            }
         }
+
+        setLoading(false);
     }, []);
 
-
     const login = (token) => {
-        const decoded = jwtDecode(token);
         localStorage.setItem("token", token);
+
+        const decoded = jwtDecode(token);
         const email = decoded.user || "";
         const username = email.split("@")[0];
+
         setAuth({
             token,
             id: decoded.sub,
-            email: email,
-            username: username,
+            email,
+            username,
             role: decoded.role,
         });
     };
 
-    // Logout function
     const logout = (navigate) => {
         localStorage.removeItem("token");
-        setAuth({ token: null, id: null, email: null, username: null, role: null });
+        setAuth({
+            token: null,
+            id: null,
+            email: null,
+            username: null,
+            role: null,
+        });
         navigate("/", { replace: true });
-        window.location.reload();
     };
 
     return (
-        <AuthContext.Provider value={{ auth, login, logout }}>
+        <AuthContext.Provider value={{ auth, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );

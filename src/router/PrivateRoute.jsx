@@ -1,30 +1,17 @@
-import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const PrivateRoute = ({ children, roles }) => {
-    const { auth } = useAuth();
-    const [isChecking, setIsChecking] = useState(true);
+    const { auth, loading } = useAuth();
 
-    useEffect(() => {
-        const token = localStorage.getItem("accessToken");
-        if (token) {
-            setIsChecking(false);
-        } else {
-            setIsChecking(false);
-        }
-    }, []);
+    if (loading) return null;
 
-    if (isChecking) {
-        return null;
-    }
-
-    if (!auth.token) {
-        return <Navigate to="/" />;
+    if (!auth?.token) {
+        return <Navigate to="/" replace />;
     }
 
     if (roles && !roles.includes(auth.role)) {
-        return <Navigate to="/unauthorized" />;
+        return <Navigate to="/unauthorized" replace />;
     }
 
     return children;

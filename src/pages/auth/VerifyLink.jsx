@@ -4,14 +4,12 @@ import API from "../../services/api";
 import DefaultButton from "../../component/Buttons/DefaultButton";
 import { useAuth } from "../../context/AuthContext";
 
-
 let isRequestSent = false;
 
 const VerifyLink = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
-
-    const { login } = useAuth()
+    const { login } = useAuth();
 
     const [loading, setLoading] = useState(true);
     const [verified, setVerified] = useState(false);
@@ -35,13 +33,12 @@ const VerifyLink = () => {
                 );
 
                 if (res.data.success) {
-                    login(res.data.accessToken)
-                    localStorage.removeItem("token");
-                    setUser(res.data.user); 
+                    login(res.data.accessToken);
+
+                    setUser(res.data.user);
                     setVerified(true);
                 }
             } catch (err) {
-                console.log(err);
                 navigate("/");
             } finally {
                 setLoading(false);

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import DashSide from '../component/Dashboard/DashSide';
 import { Outlet } from 'react-router-dom';
 import DashNav from '../component/Dashboard/DashNav';
-import DashFooter from '../component/Dashboard/Dashfooter';
 import { MdOutlineClose } from 'react-icons/md';
 import { TiThMenu } from 'react-icons/ti';
 import { useAuth } from '../context/AuthContext';
@@ -29,6 +27,9 @@ const Dashboard = () => {
     return (
         <div className="h-screen w-screen flex overflow-hidden">
 
+            <div className="">
+                <DashNav />
+            </div>
 
             <div className="flex-1 flex flex-col h-screen">
 
