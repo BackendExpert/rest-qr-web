@@ -25,7 +25,7 @@ const CardData = () => {
     ]
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
 
             {
                 dashdata.map((data, index) => {

@@ -24,7 +24,7 @@ const DashFooter = () => {
                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
 
                     <span>
-                        VERSION 1.0.0
+                        DASHBOARD VERSION v1.0.0
                     </span>
                 </div>
             </div>
