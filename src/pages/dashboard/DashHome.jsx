@@ -3,6 +3,7 @@ import CardData from './MainDash/CardData'
 import TopItems from './MainDash/TopItems'
 import ChartData from './MainDash/ChartData'
 import OrderTable from './MainDash/OrderTable'
+import CustomerReviews from './MainDash/CustomerReviews'
 
 const DashHome = () => {
     return (
@@ -17,6 +18,9 @@ const DashHome = () => {
                     </div>
                     <div className="mt-4">
                         <OrderTable />
+                    </div>
+                    <div className="mt-4">
+                        <CustomerReviews />
                     </div>
                 </div>
                 

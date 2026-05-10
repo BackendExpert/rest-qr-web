@@ -22,17 +22,17 @@ const OrderTable = () => {
 
     return (
         <div className='bg-white p-4 rounded-lg'>
-            <div className="flex justify-between">
+            <div className="md:flex justify-between">
                 <div className="">
                     <h1 className="text-xl text-gray-500">Recent Orders</h1>
                 </div>
-                <div className="flex">
+                <div className="md:flex">
                     <div className="">
                         <DefaultInput
                             placeholder={"Search Orders"}
                         />
                     </div>
-                    <div className="mx-4">
+                    <div className="mx-4 md:my-0 my-4">
                         <Dropdown
                             label={
                                 dropdownmenu.find(d => d.value === selected)?.name
@@ -43,7 +43,7 @@ const OrderTable = () => {
                             }))}
                         />
                     </div>
-                    <div className="">
+                    <div className="md:my-0 my-2">
                         <a href="">
                             <DefaultButton
                                 type='button'
