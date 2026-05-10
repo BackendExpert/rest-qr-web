@@ -4,6 +4,7 @@ import TopItems from './MainDash/TopItems'
 import ChartData from './MainDash/ChartData'
 import OrderTable from './MainDash/OrderTable'
 import CustomerReviews from './MainDash/CustomerReviews'
+import ActivityLog from './MainDash/ActivityLog'
 
 const DashHome = () => {
     return (
@@ -25,7 +26,12 @@ const DashHome = () => {
                 </div>
                 
                 <div className="xl:w-1/4 xl:ml-4">
-                    <TopItems />
+                    <div className="">
+                        <TopItems />
+                    </div>
+                    <div className="mt-4">
+                        <ActivityLog />
+                    </div>
                 </div>
             </div>
         </div>

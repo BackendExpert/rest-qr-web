@@ -61,7 +61,7 @@ const CustomerReviews = () => {
                         return (
                             <div
                                 key={data.id}
-                                className="group bg-white border border-orange-100 rounded-3xl p-6 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                                className="group bg-white border border-orange-100 rounded-3xl p-6 shadow-sm hover:-translate-y-1 transition-all duration-300"
                             >
                                 <div className="flex items-start justify-between mb-5">
                                     <div>
