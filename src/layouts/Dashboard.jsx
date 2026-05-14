@@ -62,7 +62,7 @@ const Dashboard = () => {
 
                 <DashNav />
 
-                <div className="flex-1 mx-6 min-h-screen">
+                <div className="flex-1 mx-6 ">
                     <Outlet />
                 </div>
 

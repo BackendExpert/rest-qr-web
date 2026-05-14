@@ -46,9 +46,6 @@ const ActivityLog = () => {
                     <h1 className="text-2xl font-bold text-black">
                         Recent Activity
                     </h1>
-                    <p className="text-sm text-gray-500 mt-1">
-                        Latest updates from users and admin actions
-                    </p>
                 </div>
 
                 <a

@@ -8,6 +8,7 @@ import Dashboard from '../layouts/Dashboard'
 import PrivateRoute from './PrivateRoute'
 import DashHome from '../pages/dashboard/DashHome'
 import DashError from '../component/Dashboard/DashError'
+import CreateCategories from '../pages/Food/CreateCategories'
 
 
 function App() {
@@ -26,6 +27,10 @@ function App() {
                     <Route path='*' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><DashError /></PrivateRoute>} />
                 
                     <Route index element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><DashHome /></PrivateRoute> } />
+                
+                
+                    <Route path='food/categories' element={<PrivateRoute roles={['super_admin', 'system_admin', 'member']} ><CreateCategories /></PrivateRoute> } />
+
                 </Route>
 
 
